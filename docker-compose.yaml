@@ -1,0 +1,18 @@
+version: '2.1'
+
+volumes:
+  api-postgres-data:
+    driver: local
+
+services:
+  postgres:
+    image: postgres:11
+    container_name: api-postgres
+    volumes:
+      - api-postgres-data:/var/lib/postgresql/data
+    ports:
+      - "7654:5432"
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=homestead
+      - POSTGRES_USER=root
