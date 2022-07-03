@@ -14,7 +14,6 @@ class AuthController {
 
     if (!user) {
       return res.sendStatus(401).json({ error: 'Usuário não encontrado' });
-
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);

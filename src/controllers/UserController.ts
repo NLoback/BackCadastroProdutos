@@ -1,32 +1,22 @@
 import { Request, Response } from 'express';
-import { AppDataSource } from '../data-source';
+import { CreateUserService } from '../services/Users/CreateUserService';
 
-import User from '../entity/User';
 
 class UserController {
-  index(req: Request, res: Response) {
+  show(req: Request, res: Response) {
     return res.send({ userId: req.userId });/*verifica se o Id foi armazenado corretamente*/
   }
 
+  async create(req: Request, res: Response) {
 
+    const { email, password, firstName, lastName } = req.body; /* pega os dados da requisição que vem do front e desestrutura */
 
-  async store(req: Request, res: Response) {
-    const repository = AppDataSource.getRepository(User);
-    const { email, password, firstName, lastName } = req.body;
+    const user = await CreateUserService.execute({ email, password, firstName, lastName }); /* chama o metodo execute do service */
 
-
-    /*Verifca se o email ja foi utilizado caso esteja em uso retornara erro */
-    const userExists = await repository.findOne({ where: { email } });
-
-    if (userExists) {
-      return res.sendStatus(409).json({ error: 'E-mail já cadastrado' });
-    }
-
-    const user = repository.create({ email, password, firstName, lastName });
-    await repository.save(user);
-
-    return res.json(user).json({ success: 'Usuário criado com sucesso!' });
+    return res.json({
+      user: user,
+      success: "User created successfully"
+    });
   }
 }
-
 export default new UserController();
