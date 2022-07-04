@@ -4,20 +4,16 @@ import { AppDataSource } from "../../data-source";
 /* type funciona como um interface */
 
 type CategoryUpdateRequest = {
-  id: string,
-  produto: string;
+  nome: string;
+  fabricacao: Date;
+  perecivel: boolean;
   preco: number;
-  qtd: number;
-  categoria: string;
-  compra: Date;
   validade: Date;
 }
 
 export class UpdateProductService {
   /* CatergoryUpdateRequest refatorado para data */
-  async execute(data: CategoryUpdateRequest) {
-
-    await AppDataSource.getRepository(Product).update(data.id, data);
-
+  async execute(data: CategoryUpdateRequest, id: string): Promise<void> {
+    await AppDataSource.getRepository(Product).update(id, data);
   }
 }

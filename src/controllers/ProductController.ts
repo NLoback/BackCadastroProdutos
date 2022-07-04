@@ -12,30 +12,15 @@ class ProductController {
 
   async create(req: Request, res: Response) {
 
-    const {
-      produto,
-      categoria,
-      compra,
-      preco,
-      qtd,
-      validade
-    } = req.body; /* pega os dados da requisão que vem do front e desestrutura */
+    /* pega os dados da requisão que vem do front e desestrutura */
 
-    const product = await CreateProductService.execute({
-      produto,
-      categoria,
-      compra,
-      preco,
-      qtd,
-      validade
-    }); /* chama o metodo execute do service */
+    const product = await CreateProductService.execute(req.body); /* chama o metodo execute do service */
 
     return res.json({
       product: product,
       success: "User created successfully"
     });
   }
-
 
   async delete(req: Request, res: Response) {
 
@@ -48,7 +33,7 @@ class ProductController {
     if (result instanceof Error) {
       return res.status(400).json(result.message);
     }
-    return response.json(200).end();
+    return res.status(200).json('Produto excluido com sucesso');
   }
 
 
@@ -66,21 +51,11 @@ class ProductController {
 
     const { id } = req.params;
 
-    const { produto, categoria, compra, preco, qtd, validade } = req.body;
-
     const service = new UpdateProductService();
 
-    const result = await service.execute({
-      id,
-      produto,
-      categoria,
-      compra,
-      preco,
-      qtd,
-      validade
-    });
+    await service.execute(req.body, id);
 
-    return response.json(200).end();
+    return res.status(200).json('Produto Atualizado com sucesso');
   }
 }
 

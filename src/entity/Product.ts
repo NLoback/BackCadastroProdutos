@@ -8,22 +8,19 @@ class Product {
   id: string
 
   @Column()
-  produto: string
+  nome: string
+
+  @Column()
+  fabricacao: Date
+
+  @Column()
+  perecivel: boolean
+
+  @Column({ nullable: true })
+  validade?: Date
 
   @Column()
   preco: number
-
-  @Column()
-  qtd: number
-
-  @Column()
-  categoria: string
-
-  @Column()
-  compra: Date
-
-  @Column()
-  validade: Date
 
 }
 

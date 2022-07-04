@@ -13,6 +13,6 @@ controllers => componentes que recebem requisições e retornam respostas
 
 #para iniciar servidor usar comando npm start
 #toda vez que for gerar migration executar 
-npm run migration:generate src/migrations/*.ts
+npm run migration:generate src/migrations/<nome da migration>
 #para rodar banco de dados usar comando sudo docker compose up -d toda vez que reiniciar a maquina 
 #rodar este comando npm run migration:up sempre que fizer alteração no banco de dados do projeto 
