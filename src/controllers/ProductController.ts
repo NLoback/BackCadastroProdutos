@@ -15,10 +15,11 @@ class ProductController {
     /* pega os dados da requisão que vem do front e desestrutura */
 
     const product = await CreateProductService.execute(req.body); /* chama o metodo execute do service */
-
+    console.log('Produto criado com sucesso');
     return res.json({
       product: product,
       success: "User created successfully"
+
     });
   }
 
@@ -51,12 +52,17 @@ class ProductController {
 
     const { id } = req.params;
 
+
     const service = new UpdateProductService();
 
     await service.execute(req.body, id);
 
+    console.log('produto atualizado com sucesso');
+
     return res.status(200).json('Produto Atualizado com sucesso');
+
   }
+
 }
 
 export default new ProductController();

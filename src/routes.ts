@@ -9,7 +9,7 @@ import ProductController from "./controllers/ProductController";
 
 const Routes = Router();
 /* rotas do usuario */
-Routes.post('/users', UserController.create);
+
 Routes.post('/auth', AuthController.authenticate);
 Routes.get('/users', authMiddleware, UserController.show);
 /* rotas produtos */

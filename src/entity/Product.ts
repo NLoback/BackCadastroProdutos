@@ -8,7 +8,7 @@ class Product {
   id: string
 
   @Column()
-  nome: string
+  produto: string
 
   @Column()
   fabricacao: Date

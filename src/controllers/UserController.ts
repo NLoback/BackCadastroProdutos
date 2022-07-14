@@ -8,11 +8,10 @@ class UserController {
   }
 
   async create(req: Request, res: Response) {
-
     const { email, password, firstName, lastName } = req.body; /* pega os dados da requisição que vem do front e desestrutura */
 
     const user = await CreateUserService.execute({ email, password, firstName, lastName }); /* chama o metodo execute do service */
-
+    console.log('Usuario Criado Com Sucesso e Ódio')
     return res.json({
       user: user,
       success: "User created successfully"

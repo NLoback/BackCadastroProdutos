@@ -23,7 +23,7 @@ export class CreateUserService {
     const emailValidator = await repo.findOne({ where: { email } });
 
     if (emailValidator) { /*se o email ja existir retorna erro*/
-      return new Error('User already exists');
+      throw new Error('User already exists');
     }
 
     const user = repo.create({ /*cria um novo usuario*/
